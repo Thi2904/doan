@@ -1,0 +1,108 @@
+.header, .section__container, body {
+    overflow: visible !important;
+}
+
+.user-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+/* Giới hạn độ rộng tối đa */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid gray;
+    transition: background-color 0.3s;
+    max-width: 200px; /* hoặc giá trị bạn mong muốn */
+    overflow: hidden;
+}
+
+.user-info:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--white);
+}
+
+/* Tên người dùng dài sẽ bị cắt và hiển thị dấu ... */
+.user-name {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* hoặc auto + flex-grow nếu cần */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dropdown-icon {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg fill='%23FFF' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><path d='M143 352.3l-136-136c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0L160 241l96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.5 9.4-24.7 9.4-34.0 0z'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    color: #0a0a0a;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background-color: var(--primary-color-dark);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem);
+    transition: 0.3s;
+    z-index: 10000;
+}
+
+.user-dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown.open .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.logout-button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: red;
+    font: inherit;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+}

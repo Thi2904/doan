@@ -1,0 +1,298 @@
+/* ==== Layout chính ==== */
+.profile-main {
+    padding: 3rem 1rem;
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-wrapper {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* ==== Sidebar ==== */
+.profile-sidebar {
+    width: 260px;
+}
+
+.profile-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #007bff33;
+}
+
+.profile-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* ==== Navigation Tabs ==== */
+.profile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.tab-btn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #f0f0f0;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+}
+
+.tab-btn:hover {
+    background: #e2e6ea;
+}
+
+.tab-btn.active {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* ==== Nội dung chính ==== */
+.profile-content {
+    flex: 1;
+}
+
+.tab-content {
+    display: none;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+/* ==== Form chỉnh sửa thông tin ==== */
+.profile-form {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-row input {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-row input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* ==== Nút hành động ==== */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.3s;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #0069d9;
+}
+
+.btn-link {
+    background: none;
+    color: #007bff;
+    padding: 0;
+    border: none;
+}
+
+/* ==== Bảng bookings ==== */
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.bookings-table th,
+.bookings-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.bookings-table th {
+    background: #f1f3f5;
+    font-weight: 600;
+    color: #333;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.status-pending   { background: #ffc107; }
+.status-confirmed { background: #17a2b8; }
+.status-checked_in{ background: #28a745; }
+.status-completed { background: #6c757d; }
+.status-cancelled { background: #dc3545; }
+
+.dataTables_wrapper {
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    margin-top: 1rem !important;
+}
+
+table.dataTable {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    background-color: #fff !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+table.dataTable thead {
+    background-color: #0f172a !important;
+    color: #fff !important;
+}
+
+table.dataTable thead th {
+    padding: 12px 16px !important;
+    text-align: left !important;
+    border-bottom: 1px solid #ddd !important;
+}
+
+table.dataTable tbody td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #eee !important;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #f9f9f9 !important;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    margin: 1rem 0 !important;
+    font-size: 14px !important;
+    color: #222 !important;
+}
+
+.dataTables_filter input {
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+    border: 1px solid #ccc !important;
+}
+
+.dataTables_length select {
+    padding: 6px 10px !important;
+    border-radius: 4px !important;
+    border: 1px solid #ccc !important;
+}
+
+.dataTables_paginate {
+    margin-top: 1rem !important;
+    text-align: right !important;
+}
+
+.dataTables_paginate .paginate_button {
+    padding: 6px 10px !important;
+    margin: 0 2px !important;
+    background-color: #f1f1f1 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    color: #333 !important;
+    font-size: 14px !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+    color: white !important;
+    border-color: #0f172a !important;
+}
+
+.dataTables_info {
+    font-size: 13px !important;
+    margin-top: 0.5rem !important;
+    color: #555 !important;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: #007bff !important;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-action:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.btn-action.view i {
+    font-size: 18px;
+}

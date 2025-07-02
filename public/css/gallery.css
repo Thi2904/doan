@@ -1,0 +1,277 @@
+/* Gallery styles */
+.gallery {
+    display: grid; /* Sử dụng lưới để bố cục */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Tự động điều chỉnh số cột */
+    gap: 16px; /* Khoảng cách giữa các mục */
+    padding: 0;
+    list-style: none; /* Xóa dấu bullet */
+    margin: 0;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden; /* Ẩn phần dư */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px); /* Hiệu ứng hover nổi lên */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng */
+    height: 150px; /* Chiều cao cố định để đồng nhất */
+    object-fit: cover; /* Giữ tỷ lệ hình ảnh */
+    display: block;
+}
+
+.gallery-info {
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.gallery-info span {
+    font-weight: 500;
+}
+
+.actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.actions .btn-action {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.actions .btn-action:hover {
+    background: #007bff;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.actions .btn-action i {
+    font-size: 18px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Thu nhỏ cột trên màn hình nhỏ */
+    }
+
+    .gallery-item img {
+        height: 120px;
+    }
+}
+/* View button - màu xanh lam */
+.btn-action.view {
+    background-color: #007bff; /* Màu xanh lam */
+}
+
+.btn-action.view:hover {
+    background-color: #0056b3; /* Màu xanh lam đậm hơn khi hover */
+    transform: scale(1.1); /* Hiệu ứng phóng to nhẹ */
+}
+
+/* Edit button - màu cam */
+.btn-action.edit {
+    background-color: #fd7e14; /* Màu cam */
+    color: white;
+}
+
+.btn-action.edit:hover {
+    background-color: #e8590c; /* Màu cam đậm hơn khi hover */
+    transform: scale(1.1);
+}
+
+/* Delete button - màu đỏ */
+.btn-action.delete {
+    background-color: #dc3545; /* Màu đỏ */
+}
+
+.btn-action.delete:hover {
+    background-color: #b02a37; /* Màu đỏ đậm hơn khi hover */
+    transform: scale(1.1);
+}
+
+/* Add some focus outline for accessibility */
+.btn-action:focus {
+    outline: 2px solid #f8f9fa; /* Đường viền trắng khi focus */
+    outline-offset: 2px;
+}
+
+/* Responsive adjustments for buttons */
+@media (max-width: 768px) {
+    .btn-action {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; /* hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ensure clicks inside modal-box don't close overlay */
+.modal-box {
+    background: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease-out;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Headers */
+.modal-box h3 {
+    margin: 0;
+    padding: 16px;
+    font-size: 1.25rem;
+    border-bottom: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+/* Body */
+.modal-body {
+    padding: 16px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+.modal-body p {
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+.modal-body img {
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+/* Checkbox Styles */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+.form-group input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #007BFF;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: background 0.2s;
+}
+.form-group input[type="checkbox"]:checked {
+    background: #007BFF;
+}
+.form-group input[type="checkbox"]:checked::after {
+    content: '\2713';
+    position: absolute;
+    top: -2px;
+    left: 1px;
+    font-size: 0.9rem;
+    color: #fff;
+}
+.form-group label {
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.modal-footer {
+    padding: 12px 16px;
+    text-align: right;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+/* Buttons */
+.btn-action {
+    padding: 8px 16px;
+    margin-left: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #007BFF;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-action:hover {
+    background: #0056b3;
+}
+.btn-action.add {
+    background: #28a745;
+}
+.btn-action.add:hover {
+    background: #1e7e34;
+}
+
+/* Adjust spacing between Add button and gallery */
+.head {
+    margin-bottom: 1.5rem;
+}
+.gallery {
+    margin-top: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-box {
+        width: 95%;
+        margin: 0 10px;
+    }
+}
+

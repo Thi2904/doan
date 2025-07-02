@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #fafafa;
+    --border-light: #eee;
+}
+
+header {
+    height: auto !important;
+    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: white !important
+}
+
+.btn {
+    border: 1px solid rgba(0,0,0,0.1) !important;
+}
+
+/* Container chung */
+.room-type {
+    padding: 4rem 1rem;
+    font-family: 'Cormorant Garamond', serif !important;
+}
+
+/* Tiêu đề & mô tả */
+.room-type .section__header {
+    max-width: none !important ;
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
+    color: var(--text-dark);
+    text-align: center !important;
+    font-weight: 400 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+}
+.room-type .section__description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: black ;
+    text-align: center;
+    max-width: none ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grid chứa các card */
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards trên màn hình lớn */
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .rooms-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards trên màn hình trung bình */
+    }
+}
+
+@media (max-width: 768px) {
+    .rooms-grid {
+        grid-template-columns: 1fr; /* 1 card trên màn hình nhỏ */
+    }
+}
+
+/* Card chính */
+.room-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Carousel ảnh với scroll-snap */
+.room-images {
+    position: relative;
+    width: 100%;
+    height: 230px; /* Chiều cao cố định cho hình ảnh */
+    overflow: hidden;
+}
+
+/* tất cả ảnh chồng lên nhau */
+.room-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    opacity: 0;
+    animation: slideFade 12s infinite;
+}
+
+/* nth-child để stagger animation */
+.room-images img:nth-child(1) { animation-delay: 0s; }
+.room-images img:nth-child(2) { animation-delay: 3s; }
+.room-images img:nth-child(3) { animation-delay: 6s; }
+
+/* keyframes: mỗi ảnh fade-in → stay → fade-out */
+@keyframes slideFade {
+    0%   { opacity: 0; }
+    8%   { opacity: 1; }
+    25%  { opacity: 1; }
+    33%  { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* Thông tin phòng */
+.room-info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.room-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif !important;
+    color: var(--text-dark);
+}
+.price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: .75rem;
+}
+.room-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    font-size: .95rem;
+    color: var(--text-light);
+}
+.room-details li {
+    margin-bottom: .25rem;
+}
+.desc {
+    flex-grow: 1;
+    font-size: .95rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+/* Button Đặt Ngay */
+.room-info .btn {
+    align-self: start;
+    padding: .6rem 1.2rem;
+    border: 2px solid var(--primary-color-dark);
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color .3s, border-color .3s;
+}
+.room-info .btn:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color);
+}
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.nav__links a {
+    color: var(--text-dark);
+}
+
+header {
+    height: 100%;
+}
+
+/* Container chung cho sidebar + grid */
+.layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Main grid mở rộng */
+.rooms-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.divider {
+    border-top: 3px solid var(--primary-color); /* Đường chia mảnh, màu sáng */
+    margin: 2rem auto 3rem; /* Khoảng cách trên và dưới, căn giữa */
+    width: 20%; /* Giảm chiều rộng của divider */
+    opacity: 0.6; /* Tạo độ mờ nhẹ cho đường chia */
+}
+
+.room-details li i {
+    margin-right: 0.25rem;
+    color: #102348;
+}
+

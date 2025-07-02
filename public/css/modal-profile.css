@@ -1,0 +1,181 @@
+/* ========== Modal Overlay ========== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+/* ========== Outer Modal Box as a Card ========== */
+.modal-box {
+    position: relative;
+    background: #fff;
+    padding: 24px;
+    border: 4px solid #3c2a21;
+    border-radius: 24px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+/* ========== Main text area ========= */
+.modal-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ========== Side panel: image + close button at bottom ========= */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* space between image (top) and button (bottom) */
+}
+
+/* ========== Image box ========= */
+.modal-image {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 3px solid #3c2a21;
+    border-radius: 8px;
+    background: #c9e4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========== Title ========= */
+.modal-body h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #3c2a21;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ========== Divider ========= */
+.card-divider {
+    width: 100%;
+    height: 2px;
+    background: #3c2a21;
+    margin: 12px 0;
+}
+
+/* ========== Body paragraphs ========= */
+.modal-body p {
+    margin: 6px 0;
+    color: #555;
+    font-size: 16px;
+}
+
+.modal-body p strong {
+    color: #222;
+}
+
+/* ========== Close button ========= */
+.modal-footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 64px; /* Đẩy nút xuống dưới cùng */
+}
+
+.modal-footer .btn-action {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+.modal-footer .btn-action:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* ========== Responsive ========= */
+@media (max-width: 600px) {
+    .modal-box {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+    }
+    .modal-content {
+        width: 100%;
+    }
+    .side-panel {
+        margin-left: 0;
+        margin-top: 16px;
+        justify-content: center;
+    }
+    .modal-image {
+        width: 80px;
+        height: 80px;
+    }
+    .modal-body h3 {
+        font-size: 20px;
+    }
+    .modal-body p {
+        font-size: 14px;
+    }
+}
+
+/* trạng thái Active chữ xanh */
+.active-status {
+    color: green !important;
+    font-weight: 600;
+}
+
+/* trạng thái Inactive chữ vàng */
+.inactive-status {
+    color: goldenrod !important;
+    font-weight: 600;
+}
+
+/* chung cho mọi .btn-action */
+.btn-action {
+    background-color: var(--btn-bg, #007bff);
+    color:           var(--btn-color, #fff);
+    border:          none;
+    border-radius:   6px;
+    padding:         6px 12px;
+    cursor:          pointer;
+    transition:      background-color 0.2s ease;
+}
+
+/* riêng .toggle-status dùng nền vàng, chữ đen */
+.btn-action.toggle-status {
+    --btn-bg:    #ffc107;
+    --btn-color: #212529;
+}
+
+/* hover cho .toggle-status */
+.btn-action.toggle-status:hover {
+    --btn-bg: #e0a800;
+}

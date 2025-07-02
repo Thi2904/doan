@@ -1,0 +1,377 @@
+.header {
+    position: relative;  /* hoặc fixed nếu bạn cần header luôn cố định */
+    z-index: 1000;       /* cao hơn hero */
+}
+
+.header, body {
+    overflow: visible !important;
+}
+
+/* === Cơ bản & Typography === */
+body {
+    background: #f5f0e6;
+    font-family: 'Raleway', sans-serif;
+    color: #333;
+}
+h1, h2, h3 { color: #6b4f1c; font-family: 'Cormorant Garamond', serif; }
+h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+/* === Progressbar === */
+.progressbar {
+    display: flex;
+    justify-content: space-between;
+    counter-reset: step;
+    margin: 2rem 0;
+    position: relative;
+}
+.progressbar li {
+    position: relative;
+    text-align: center;
+    flex: 1;
+    list-style: none;
+    color: #aaa;
+}
+.progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 32px; height: 32px;
+    line-height: 32px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background: #fff;
+    display: block;
+    margin: 0 auto 0.5rem;
+    font-weight: bold;
+    color: #6b4f1c;
+}
+.progressbar li:after {
+    content: '';
+    position: absolute;
+    width: 100%; height: 4px;
+    background: #eee;
+    top: 14px; left: -50%;
+    z-index: -1;
+}
+.progressbar li:first-child:after { display: none; }
+.progressbar li.active {
+    color: #6b4f1c;
+}
+.progressbar li.active:before {
+    background: #d4af37;
+    border-color: #d4af37;
+    color: #fff;
+}
+.progressbar li.active + li:after {
+    background: #d4af37;
+}
+
+/* === Card === */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+/* === Form Steps === */
+.form-step { display: none; }
+.form-step.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* === Inputs & Labels === */
+label { font-weight: 600; margin-bottom: 0.5rem; display: block; }
+input[type=text], input[type=email], input[type=number], select, .flatpicker {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+input:focus, select:focus, .flatpicker:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+/* === Buttons & Navigation === */
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; }
+.nav button {
+    background: #d4af37;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+.nav button:hover {
+    background: #bfa035;
+    transform: translateY(-2px);
+}
+.nav button[disabled] {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* === Room Details Preview === */
+.room-details {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.room-img {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* === Fees Group === */
+.fees-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+.fee-item {
+    background: #fef9e7;
+    border: 1px solid #f2d98f;
+    border-radius: 6px;
+    padding: 0.5rem;
+}
+.fee-item label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* === Summary === */
+.summary {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+.summary p, .summary ul { margin-bottom: 1rem; }
+.summary ul li { margin-left: 1rem; list-style: disc; color: #555; }
+
+/* === Modal Overlay === */
+.modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center; z-index: 2000;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+.modal h3 {
+    margin-bottom: 1rem;
+    color: #6b4f1c;
+    font-family: 'Cormorant Garamond', serif;
+}
+.modal button {
+    margin-top: 1.5rem;
+    background: #d4af37;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+.modal button:hover {
+    background: #bfa035;
+}
+
+.room-type {
+    padding: 1rem 0;
+}
+
+/* CSS bổ sung */
+.step-card h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 0.5rem;
+}
+
+.step1-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flatpicker,
+#roomCount {
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.flatpicker:hover,
+#roomCount:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.flatpicker:focus,
+#roomCount:focus {
+    border-color: #d4af37;
+    box-shadow: 0 2px 12px rgba(212,175,55,0.3);
+}
+
+/* Guests container: mỗi khách trong một box */
+.guests-grid {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 1rem;
+}
+
+/* Grid tổng cho summary */
+.summary-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    row-gap: 0.75rem;
+    column-gap: 1.5rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+/* Mỗi ô thông tin */
+.summary-block {
+    grid-column: 1 / -1; /* cho block full width khi cần */
+    display: contents;    /* để label và value tự động vào lưới */
+}
+
+/* Nhãn bên trái */
+.summary-label {
+    font-weight: 600;
+    color: #6b4f1c;
+}
+
+/* Giá trị bên phải */
+.summary-value {
+    color: #333;
+}
+
+/* Container phòng & phụ phí */
+.summary-room,
+.summary-fees {
+    grid-column: 1 / -1;
+    padding: 1rem;
+    border: 1px solid gray;
+    border-radius: 6px;
+    background: #fafafa;
+    margin: 1rem 0;           /* tăng margin-top và margin-bottom */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;         /* khoảng cách giữa label & value */
+    row-gap: 0.5rem;          /* khoảng cách giữa các dòng con */
+}
+
+/* Tiêu đề con (label) */
+.summary-room .summary-label,
+.summary-fees .summary-label {
+    font-size: 0.95rem;       /* hơi nhỏ hơn value */
+    font-weight: 600;
+    color: #444;
+}
+
+/* Giá trị con (value) */
+.summary-room .summary-value,
+.summary-fees .summary-value {
+    font-size: 1rem;
+    color: #222;
+    margin-left: 0.5rem;      /* thụt lề thêm */
+}
+
+/* Tổng kết */
+.summary-total {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    border-top: 1px dashed gray;
+    padding-top: 1rem;
+}
+
+/* Tạo khoảng cách trước và sau hr trong summary */
+.summary-total hr {
+    margin: 1.5rem 0;  /* đẩy cách xa trên dưới */
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Container tổng kết */
+.summary-total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+/* Kiểu cho dòng Tổng tiền */
+.summary-total > .summary-block:first-child .summary-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+}
+.summary-total > .summary-block:first-child .summary-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #6b4f1c;
+}
+
+/* Phần con (deposit và remaining) thụt vào */
+.summary-total .summary-block:not(:first-child) {
+    display: flex;
+    margin-left: 2rem;     /* thụt vào */
+    margin-top: 0.5rem;    /* khoảng cách giữa các dòng */
+}
+
+/* Nhãn con nhỏ hơn */
+.summary-total .summary-block:not(:first-child) .summary-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 8rem;
+}
+
+/* Giá trị con */
+.summary-total .summary-block:not(:first-child) .summary-value {
+    color: #333;
+}
+
+/* Ví dụ nếu bạn có hr riêng: */
+/* Nếu bạn đang insert <hr> thủ công, dùng selector này */
+.summary hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px dashed #ccc;
+}

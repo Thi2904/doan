@@ -1,0 +1,386 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    display: none; /* Ẩn mặc định, bật bằng JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Hiển thị overlay khi thêm class active */
+.modal-overlay.active {
+    display: flex;
+}
+
+/* Hộp modal chính */
+.modal-box {
+    background: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 24px;
+    animation: pop-in 0.2s ease-out;
+}
+
+/* Hiệu ứng animation */
+@keyframes pop-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tiêu đề modal */
+.modal-box h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+/* Thân form */
+.modal-body {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-body label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #555;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="number"],
+.modal-body textarea,
+.modal-body select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-body textarea {
+    resize: vertical;
+}
+
+/* Row cấu hình giường */
+.bed-config-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.bed-config-item {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bed-config-item input {
+    margin-top: 4px;
+}
+
+/* Checkbox tiện nghi */
+.checkbox-container {
+    position: relative;
+}
+
+.toggle-checkbox-btn {
+    background: #f0f0f0;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.toggle-checkbox-btn:hover {
+    background: #e0e0e0;
+}
+
+.checkbox-group {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.checkbox-group.hidden {
+    display: none;
+}
+
+.checkbox-inline {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.95rem;
+}
+
+/* ========== Bed Config (3 trên 1 hàng) ========== */
+/* ====== Chỉnh lại cho 3 input trên 1 hàng ====== */
+.bed-config-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột đều nhau */
+    gap: 12px;                             /* khoảng cách giữa các ô */
+    margin-top: 10px;
+}
+
+/* Giữ nguyên styling từng item */
+.bed-config-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.bed-config-item label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.bed-config-item input[type="number"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #f9f9f9;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bed-config-item input[type="number"]:focus {
+    border: 1px solid #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+    outline: none;
+}
+
+/* Media queries để responsive */
+@media (max-width: 768px) {
+    .bed-config-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .bed-config-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== Modal Footer ========== */
+.modal-footer {
+    grid-column: 1 / -1;
+    margin-top: 25px;
+    text-align: right;
+}
+.modal-footer .btn-action {
+    background: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-left: 10px;
+}
+.modal-footer .btn-action:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* ========== Animations ========== */
+@keyframes modalFadeIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeOverlay {
+    from { background: rgba(0, 0, 0, 0); }
+    to   { background: rgba(0, 0, 0, 0.5); }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .modal-box { width: 90%; padding: 20px; }
+    .modal-body { grid-template-columns: 1fr; }
+    .bed-config-group { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    .bed-config-group { grid-template-columns: 1fr; }
+}
+
+/* ========== Amenities Section (giữ nguyên của bạn) ========== */
+.amenities-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+.amenities-section h4 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+}
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+.amenity-item {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #555;
+}
+.amenity-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+.toggle-checkbox-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+.toggle-checkbox-btn:hover {
+    background: #0056b3;
+}
+.checkbox-group.hidden {
+    display: none;
+}
+.checkbox-group.show {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+
+/* ========== Modal Overlay - New ========== */
+.modal-overlay-new {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Nền tối hơn để làm nổi bật modal */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: background 0.3s ease-in-out;
+}
+.modal-overlay-new.active {
+    display: flex;
+    animation: fadeOverlayNew 0.3s ease forwards;
+}
+
+/* ========== Modal Box - New ========== */
+.modal-box-new {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 700px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    box-sizing: border-box;
+    animation: modalFadeInNew 0.3s ease;
+    overflow: hidden;
+}
+
+/* ========== Modal Header - New ========== */
+.modal-box-new h3 {
+    margin: 0 0 20px;
+    font-size: 24px; /* Font chữ lớn hơn */
+    font-weight: 700;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0; /* Đường kẻ nhẹ nhàng */
+    padding-bottom: 10px;
+}
+
+/* ========== Modal Body - New ========== */
+.modal-body-new {
+    font-size: 16px; /* Font chữ rõ ràng */
+    color: #444;
+    line-height: 1.6;
+}
+.modal-body-new p {
+    margin-bottom: 15px; /* Khoảng cách giữa các đoạn */
+}
+.modal-body-new strong {
+    color: #000; /* Làm nổi bật tiêu đề */
+}
+.modal-list-new {
+    margin: 10px 0 15px;
+    padding-left: 20px;
+    list-style: disc;
+    color: #555; /* Màu sắc nhẹ nhàng */
+    font-size: 15px;
+}
+
+/* ========== Modal Footer - New ========== */
+.modal-footer-new {
+    text-align: right;
+    margin-top: 25px;
+}
+.btn-action-new {
+    background: linear-gradient(45deg, #007bff, #0056b3); /* Hiệu ứng gradient */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.btn-action-new:hover {
+    background: linear-gradient(45deg, #0056b3, #003f7f);
+    transform: translateY(-2px); /* Hiệu ứng nổi lên */
+}
+
+/* ========== Animations - New ========== */
+@keyframes modalFadeInNew {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeOverlayNew {
+    from { background: rgba(0, 0, 0, 0); }
+    to   { background: rgba(0, 0, 0, 0.7); }
+}
+
+/* ========== Responsive - New ========== */
+@media (max-width: 768px) {
+    .modal-box-new {
+        width: 95%;
+        padding: 20px;
+    }
+    .modal-body-new {
+        font-size: 14px;
+    }
+}
+@media (max-width: 480px) {
+    .modal-box-new {
+        width: 100%;
+        padding: 15px;
+    }
+    .btn-action-new {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

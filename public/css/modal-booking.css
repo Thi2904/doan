@@ -1,0 +1,714 @@
+:root {
+    /* Colors */
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --overlay-bg-light: rgba(0, 0, 0, 0.5);
+    --modal-bg: #ffffff;
+    --modal-header-footer-bg: #f1f3f5;
+    --border-color: #e9ecef;
+    --primary: #3498db;
+    --primary-hover: #2980b9;
+    --success: #28a745;
+    --secondary: #6c757d;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --text-dark: #343a40;
+    --text-muted: #495057;
+
+    /* Dimensions */
+    --modal-radius: 12px;
+    --modal-padding: 1.5rem;
+    --modal-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    --transition: 0.3s ease;
+}
+
+h5 {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+/* Overlay chung cho modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-bg);
+    display: none;
+    place-items: center;
+    z-index: 1000;
+    transition: background var(--transition), opacity var(--transition);
+}
+
+.modal-overlay.active {
+    display: grid;
+    background: var(--overlay-bg-light);
+    opacity: 1;
+}
+
+/* Modal container */
+.modal-box {
+    background: var(--modal-bg);
+    border-radius: var(--modal-radius);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--modal-shadow);
+    padding: var(--modal-padding);
+    animation: fadeInUp var(--transition) both;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from { transform: translateY(-20px); opacity: 0; }
+    to   { transform: translateY(0);       opacity: 1; }
+}
+
+/* Header & Footer chung */
+.modal-header,
+.modal-footer {
+    background: var(--modal-header-footer-bg);
+    border-color: var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: var(--modal-padding) var(--modal-padding);
+}
+
+.modal-header {
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+    justify-content: flex-end;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Close button chung */
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color var(--transition);
+}
+.modal-close:hover {
+    color: var(--danger);
+}
+
+/* Body */
+.modal-body {
+    flex: 1;
+    padding: 1rem var(--modal-padding);
+    overflow-y: auto;
+    display: grid;
+    gap: 1.75rem;
+    scrollbar-width: thin;
+}
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+/* Sections & Grids */
+.info-group { margin-bottom: 1.5rem; }
+.info-group h4 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 1rem;
+}
+.info-grid div {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+.info-grid div strong {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+/* Inputs & select */
+.modal-body input,
+.modal-body select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.modal-body input:focus,
+.modal-body select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    background: var(--primary);
+    color: #fff;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.btn-primary   { background: var(--primary);   color: #fff; }
+.btn-success   { background: var(--success);   color: #fff; }
+.btn-secondary { background: var(--secondary); color: #fff; }
+.btn-warning   { background: var(--warning);   color: #fff; }
+.btn-danger    { background: var(--danger);    color: #fff; }
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    gap: 1rem;
+}
+.cards-grid > .card {
+    background: #fafbfc;
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    padding: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.cards-grid > .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .info-grid,
+    .payments,
+    .room-content.two-columns {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Styling for the specific info-group in the schedule section */
+.schedule-info-group {
+    margin-bottom: 20px;
+}
+
+/* Title styling for the schedule group */
+.schedule-info-group h4 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* Adjusting the layout of info-grid in the schedule section to 2 columns */
+.schedule-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates two equal columns */
+    gap: 12px; /* Adds gap between the columns */
+}
+
+/* Styling for each individual item in the grid of the schedule section */
+.schedule-info-grid div {
+    display: flex;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Styling for the labels (strong) */
+.schedule-info-grid div strong {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Styling for the value text */
+.schedule-info-grid div span {
+    font-size: 0.95em;
+    color: #495057;
+}
+
+/* Arrow styling in the timeline */
+.schedule-info-grid .arrow {
+    margin: 0 8px;
+    font-weight: 600;
+    color: #3498db;
+}
+
+/* General Card Styling */
+.card {
+    background-color: #fff;
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Room Header */
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.room-header .badge {
+    background-color: #3498db;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    border-radius: 16px;
+}
+
+/* Room Content */
+.room-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Two Columns Layout */
+.room-content.two-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+/* Surcharges List */
+.room-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.room-content li {
+    font-size: 0.95rem;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+/* Payment Details */
+.card p {
+    font-size: 0.95rem;
+    color: #495057;
+    margin: 6px 0;
+}
+.card p strong {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Payment Status */
+.card .paid {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+.card .pending {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+/* No Allocations */
+.card p {
+    font-style: italic;
+    color: #888;
+}
+
+/* Date Formatting */
+.card p small {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* Room Allocation Layout */
+.room-allocations .card {
+    background-color: #f8f9fa;
+    border: 1px solid #e3e6ea;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .room-content.two-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === Modal Base === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: block;
+}
+
+/* === Modal Content === */
+.modal-content {
+    background: #fff;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+/* === Modal Title === */
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* === Modal Body === */
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* === Room Fees Section === */
+.room-fees {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.room-fees h4 {
+    margin: 0 0 10px;
+    color: #444;
+    font-size: 18px;
+}
+
+/* === Fee Section (Pre/Post) === */
+.fee-section {
+    margin-top: 15px;
+}
+
+.fee-section h5 {
+    font-size: 16px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* === Fee List === */
+.fee-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.fee-list label {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.fee-list label:hover {
+    background: #f0f8ff;
+    border-color: #007bff;
+}
+
+/* === Search Input === */
+.fee-search {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* === Modal Footer === */
+.modal-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.modal-footer button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#saveSurchargeBtn {
+    background-color: #28a745;
+    color: white;
+}
+
+#saveSurchargeBtn:hover {
+    background-color: #218838;
+}
+
+#closeSurchargeModal {
+    background-color: #6c757d;
+    color: white;
+}
+
+#closeSurchargeModal:hover {
+    background-color: #5a6268;
+}
+
+/* === Animation === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+ .custom-modal {
+     display: none;
+     position: fixed;
+     z-index: 999;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0,0,0,0.4);
+ }
+
+.custom-modal.active {
+    display: block;
+}
+
+.custom-modal-content {
+    background: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 8px;
+    position: relative;
+}
+
+.custom-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.child-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Header của bảng */
+.child-table thead {
+    background-color: #f1f3f5;
+    color: #343a40;
+    font-weight: 600;
+}
+
+.child-table thead th {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Các dòng dữ liệu */
+.child-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f3f5;
+    color: #495057;
+    text-align: left;
+}
+
+/* Dòng cuối cùng không có border dưới */
+.child-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover hiệu ứng */
+.child-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive nếu cần */
+@media (max-width: 768px) {
+    .child-table {
+        font-size: 13px;
+    }
+
+    .child-table thead th,
+    .child-table tbody td {
+        padding: 8px 10px;
+    }
+}
+
+.child-table select.payment-status-select {
+    padding: 4px 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    min-width: 120px;
+    transition: all 0.2s ease-in-out;
+}
+
+.child-table select.payment-status-select:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.child-table select.payment-status-select:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Container của tabs */
+#statusTabs {
+    border-bottom: 2px solid #dee2e6;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Mỗi item */
+#statusTabs .nav-item {
+    margin-right: 0.5rem;
+}
+
+/* Link mặc định */
+#statusTabs .nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    color: #495057;
+    background-color: #f8f9fa;
+    border: 1px solid transparent;
+    border-radius: 0.25rem 0.25rem 0 0;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover */
+#statusTabs .nav-link:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+/* Active tab */
+#statusTabs .nav-link.active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff #007bff transparent;
+}
+
+/* Đảm bảo active luôn ở trên */
+#statusTabs .nav-link.active,
+#statusTabs .nav-link.active:hover {
+    z-index: 1;
+}
+
+/* Responsive: cuộn ngang nếu quá nhiều tab */
+@media (max-width: 768px) {
+    #statusTabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #statusTabs .nav-item {
+        flex: 0 0 auto;
+    }
+}
+
+/* Hiển thị count trong tab */
+#statusTabs .nav-link .count-badge {
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Count khi tab đang active (chỉnh màu nếu cần) */
+#statusTabs .nav-link.active .count-badge {
+    background-color: #ffffff;
+    color: #007bff;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+
+.booking-date {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.date-box {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 5px;
+    background-color: #102348;
+    color: white;
+}
+
